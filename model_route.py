@@ -1,13 +1,12 @@
 from dataclasses import dataclass
 from database.select import select_list
-# Добавляем импорты для работы с транзакцией
 from database.DB_context_manager import DBContextManager
 from flask import current_app
 
 
 
 @dataclass
-class ResultInfo: # Определяет стандартизированный формат для возврата результата
+class ResultInfo: 
     result: tuple
     status: bool
     err_message: str
@@ -65,23 +64,17 @@ def model_route(provider, user_input: dict, sql_file='1.sql'):
         except Exception as e:
             err_message = f'Ошибка при выполнении транзакции заказа: {str(e)}'
             return ResultInfo(result=None, status=False, err_message=err_message)
-    # ----------------------------------------------------------------------------------
 
-    # 2. СТАНДАРТНЫЕ SELECT/DML ЗАПРОСЫ
     try:
         _sql = provider.get(sql_file)
     except KeyError:
         err_message = f"SQL-файл '{sql_file}' не найден."
         return ResultInfo(result=None, status=False, err_message=err_message)
 
-    # Определение параметров
     params = []
 
-    # --- НОВАЯ ЛОГИКА ДЛЯ BANQUET_ROUTE ---
     if sql_file == 'get_halls.sql':
-        # Для запроса залов нужен number_of_people
         params = [user_input.get('number_of_people')]
-    # -------------------------------------
     elif sql_file == 'auth.sql':
         params = [user_input.get('login', '')]
     elif 'report' in sql_file:
@@ -92,7 +85,6 @@ def model_route(provider, user_input: dict, sql_file='1.sql'):
         else:
             err_message = 'Не указаны месяц и/или год для отчёта'
             return ResultInfo(result=None, status=False, err_message=err_message)
-    # Общая логика для других запросов
     elif 'report' not in sql_file:
         query_type = user_input.get('query_type', 'category')
         if query_type == 'category':
@@ -106,14 +98,14 @@ def model_route(provider, user_input: dict, sql_file='1.sql'):
     else:
         params = [user_input.get('month'), user_input.get('year')]
 
-    # 3. Выполнение запроса
+
     try:
         result = select_list(_sql, params)
 
         if result:
             return ResultInfo(result=result, status=True, err_message=err_message)
 
-        # Специальная обработка для SELECT, которые должны вернуть данные
+
         elif sql_file == 'get_halls.sql':
             err_message = 'Не найдено подходящих залов.'
             return ResultInfo(result=None, status=False, err_message=err_message)
@@ -128,4 +120,5 @@ def model_route(provider, user_input: dict, sql_file='1.sql'):
 
     except Exception as e:
         err_message = f'Ошибка при выполнении запроса: {str(e)}'
+
         return ResultInfo(result=None, status=False, err_message=err_message)
