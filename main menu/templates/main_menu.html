@@ -1,0 +1,122 @@
+<style>
+  /*
+   * НОВЫЙ ДИЗАЙН: Роскошь и Профессионализм (Синий + Золотой + Красный)
+   * Фон: Мягкий градиент #E3F2FD -> #FFFDE7
+   * Основной цвет: #1976D2 (Deep Blue)
+   * Акцент 1: #FFC107 (Amber/Gold)
+   * Акцент 2: #C62828 (Deep Red/Bordeaux)
+   */
+  body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #E3F2FD 0%, #FFFDE7 100%); /* Светло-синий/желтый градиент */
+    font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    color: #263238;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  .container {
+    background: #FFFFFF;
+    padding: 40px 50px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(25, 118, 210, 0.15); /* Синяя тень */
+    width: 360px;
+    text-align: center;
+    border: 1px solid #BBDEFB;
+    transition: box-shadow 0.3s ease;
+  }
+  .container:hover {
+      box-shadow: 0 15px 45px rgba(198, 40, 40, 0.15); /* Смена тени на Красную */
+  }
+  h1 {
+    margin-bottom: 20px;
+    font-size: 2.2rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #1976D2; /* Глубокий Синий */
+  }
+  .user-info {
+    margin-bottom: 35px;
+    font-size: 1.15rem;
+    font-weight: 600;
+    background: #BBDEFB; /* Светло-синий фон */
+    color: #1976D2;
+    padding: 15px 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(25, 118, 210, 0.4); /* Мягкое синее свечение */
+  }
+  .variants {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .variants li {
+    margin-bottom: 22px;
+  }
+  .btn {
+    display: block;
+    padding: 16px 0;
+    background: linear-gradient(90deg, #FFC107, #FFEB3B); /* Золотой градиент */
+    color: #263238; /* Темный текст */
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.1rem;
+    border-radius: 50px;
+    box-shadow: 0 6px 20px rgba(255, 193, 7, 0.5);
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+  }
+  .btn:hover {
+    background: linear-gradient(90deg, #FFEB3B, #FFC107);
+    box-shadow: 0 10px 30px rgba(255, 193, 7, 0.7);
+    transform: translateY(-3px) scale(1.03);
+  }
+  .btn-exit {
+    /* Оставляем кнопку выхода синей, чтобы она контрастировала с основными золотыми кнопками */
+    background: linear-gradient(90deg, #1976D2, #42A5F5);
+    box-shadow: 0 6px 15px rgba(25, 118, 210, 0.5);
+    color: white;
+  }
+  .btn-exit:hover {
+    background: linear-gradient(90deg, #42A5F5, #1976D2);
+    box-shadow: 0 8px 25px rgba(66, 165, 245, 0.8);
+    transform: translateY(-3px) scale(1.03);
+  }
+  @media (max-width: 440px) {
+    .container {
+        padding: 30px 20px;
+        width: 100%;
+    }
+    h1 {
+        font-size: 1.8rem;
+    }
+  }
+</style>
+
+<body>
+  <div class="container">
+    <h1>Главное меню</h1>
+    <div class="user-info">
+      Вы вошли как: {{ user_group }}
+    </div>
+    <ul class="variants">
+      {% if has_query_access %}
+      <li><a href="/query" class="btn">Работа с запросами</a></li>
+      {% endif %}
+
+      {% if has_report_access %}
+      <li><a href="/reports" class="btn">Работа с отчётами</a></li>
+      {% endif %}
+
+      {% if has_banquet_access %}
+      <li><a href="/banquet" class="btn">Заказ банкетов</a></li>
+      {% endif %}
+
+      <li><a href="/auth/logout" class="btn btn-exit">Выход из системы</a></li>
+    </ul>
+  </div>
+</body>

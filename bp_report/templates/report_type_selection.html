@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ report_name }} - Выбор действия</title>
+    <style>
+        /* New Style: Clean Corporate / Primary Colors */
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap');
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #E6F0F9 0%, #F5F8FA 100%);
+            color: #333333;
+            margin: 0;
+            padding: 50px 0;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            align-items: center;
+        }
+
+        .container {
+            background: #FFFFFF;
+            width: 400px;
+            padding: 40px 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-top: 5px solid #C49B00; /* Gold accent */
+        }
+
+        .container:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            color: #C49B00; /* Gold */
+            margin-bottom: 30px;
+            letter-spacing: 1.5px;
+            font-weight: 900;
+            text-transform: uppercase;
+            border-bottom: 2px solid #1976D2; /* Blue underline */
+            padding-bottom: 10px;
+        }
+
+        p {
+            color: #1976D2; /* Blue hint text */
+            font-weight: 500;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .report-types {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 35px;
+        }
+
+        .report-types li {
+            margin: 15px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            width: 100%;
+            padding: 14px 0;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: white;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            user-select: none;
+            letter-spacing: 0.5px;
+            border: 2px solid transparent;
+        }
+
+        /* Create Report - Red */
+        .report-types li:nth-child(1) .btn {
+            background: #D32F2F;
+            border-color: #D32F2F;
+            box-shadow: 0 4px 10px rgba(211, 47, 47, 0.4);
+        }
+        .report-types li:nth-child(1) .btn:hover {
+            background: #B71C1C;
+            box-shadow: 0 6px 15px rgba(211, 47, 47, 0.6);
+            transform: translateY(-2px);
+        }
+
+        /* View Report - Blue */
+        .report-types li:nth-child(2) .btn {
+            background: #1976D2;
+            border-color: #1976D2;
+            box-shadow: 0 4px 10px rgba(25, 118, 210, 0.4);
+        }
+        .report-types li:nth-child(2) .btn:hover {
+            background: #1565C0;
+            box-shadow: 0 6px 15px rgba(25, 118, 210, 0.6);
+            transform: translateY(-2px);
+        }
+
+        /* Back button - Gold */
+        .btn-back {
+            background: #C49B00;
+            border: 2px solid #C49B00;
+            box-shadow: 0 4px 10px rgba(196, 155, 0, 0.4);
+            font-weight: 700;
+            max-width: 100%;
+            margin-top: 15px;
+            padding: 12px 0;
+            width: 100%;
+            letter-spacing: 0.5px;
+            font-size: 1rem;
+        }
+
+        .btn-back:hover {
+            background: #A08000;
+            box-shadow: 0 6px 15px rgba(160, 128, 0, 0.6);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Отчёт по {{ report_name.lower() }}</h2>
+    <p>Выберите действие:</p>
+    <ul class="report-types">
+      <li><a href="{{ url_for('bp_report.create_report_handle', report_type=report_type) }}" class="btn">Создать отчёт</a></li>
+      <li><a href="{{ url_for('bp_report.show_report_handle', report_type=report_type) }}" class="btn">Просмотреть отчёт</a></li>
+    </ul>
+    <a href="{{ url_for('bp_report.report_main_menu') }}" class="btn btn-back">Назад к выбору отчёта</a>
+  </div>
+</body>
+</html>

@@ -1,0 +1,279 @@
+:root {
+    --body-bg-start: #0f2027;     /* Темно-синий, почти черный */
+    --body-bg-end: #2c5364;       /* Сине-зеленый */
+    --container-bg: rgba(255, 255, 255, 0.08); /* Полупрозрачный фон контейнера */
+    --glass-border: rgba(255, 255, 255, 0.2);  /* Граница glassmorphism */
+    --text-primary: #e0f2f7;      /* Светлый текст */
+    --text-secondary: rgba(224, 242, 247, 0.8); /* Приглушенный светлый текст */
+    --table-header-bg: rgba(44, 83, 100, 0.5); /* Фон заголовка таблицы */
+    --table-row-even-bg: rgba(224, 242, 247, 0.05); /* Чередование строк */
+    --table-row-odd-bg: transparent;
+    --table-cell-border: rgba(224, 242, 247, 0.1); /* Граница ячеек */
+    --button-primary-bg: linear-gradient(135deg, #007bff, #00c6ff); /* Синий градиент кнопки */
+    --button-primary-hover-bg: linear-gradient(135deg, #00c6ff, #007bff); /* Инвертированный градиент */
+    --button-primary-shadow: rgba(0, 123, 255, 0.4);
+    --icon-color: rgba(224, 242, 247, 0.7);
+    --icon-color-hover: #ffffff;
+}
+
+body {
+    margin: 0;
+    font-family: 'Rubik', sans-serif;
+    background: linear-gradient(135deg, var(--body-bg-start) 0%, var(--body-bg-end) 100%);
+    color: var(--text-primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Используем min-height для поддержки содержимого */
+    overflow-x: hidden; /* Предотвращаем горизонтальную прокрутку */
+    padding: 20px; /* Добавляем немного padding по краям */
+    box-sizing: border-box;
+}
+
+/* --- Контейнер с эффектом Glassmorphism --- */
+.container {
+    width: 90%;
+    max-width: 1000px; /* Максимальная ширина контейнера */
+    background: var(--container-bg);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 40px 35px;
+    box-shadow: 0 15px 35px var(--shadow-medium), 0 0 0 1px var(--glass-border); /* Тень + тонкая рамка */
+    border: 1px solid var(--glass-border);
+    text-align: center;
+    animation: fadeInUp 0.8s ease-out forwards;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- Заголовок отчета --- */
+.report-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 40px;
+    letter-spacing: 0.03em;
+    color: var(--text-primary);
+    text-shadow: 0 0 12px rgba(140, 230, 255, 0.5); /* Голубое свечение */
+}
+
+/* --- Обертка для таблицы (чтобы добавить скроллбар при необходимости) --- */
+.table-wrapper {
+    overflow-x: auto; /* Горизонтальный скроллбар, если таблица слишком широкая */
+    margin-bottom: 40px;
+    max-height: 50vh; /* Ограничиваем высоту таблицы, чтобы заголовок оставался видимым */
+    overflow-y: auto; /* Вертикальный скроллбар, если много строк */
+    border-radius: 10px; /* Закругляем углы обертки */
+}
+
+/* --- Стилизация таблицы --- */
+table {
+    width: 100%;
+    border-collapse: separate; /* Используем separate для отдельной рамки заголовка */
+    border-spacing: 0;
+    table-layout: fixed; /* Фиксированная ширина колонок */
+}
+
+/* --- Фича: Залипающий заголовок --- */
+thead {
+    position: sticky; /* Заставляет заголовок "прилипать" */
+    top: 0; /* Прилипает к верхнему краю table-wrapper */
+    z-index: 10; /* Чтобы был поверх строк */
+    background: var(--table-header-bg);
+    backdrop-filter: blur(5px); /* Небольшое размытие для заголовка */
+}
+
+thead tr {
+    background: var(--table-header-bg);
+}
+
+thead th {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    padding: 18px 15px;
+    text-align: center;
+    border-right: 1px solid var(--glass-border); /* Граница между ячейками */
+    white-space: nowrap; /* Предотвращаем перенос текста в заголовках */
+}
+
+/* Убираем границу у последней ячейки заголовка */
+thead th:last-child {
+    border-right: none;
+}
+
+thead th i {
+    margin-right: 10px;
+    color: var(--icon-color);
+    font-size: 1.1em;
+    transition: color 0.3s ease;
+}
+
+/* --- Тело таблицы --- */
+tbody tr {
+    background-color: var(--table-row-odd-bg); /* По умолчанию */
+    transition: background-color 0.2s ease;
+}
+
+tbody tr:nth-child(even) {
+    background-color: var(--table-row-even-bg); /* Чередование строк */
+}
+
+tbody tr:hover {
+    background-color: var(--table-header-bg); /* Эффект при наведении на строку */
+}
+
+tbody td {
+    padding: 15px 15px;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+    border-top: 1px solid var(--table-cell-border); /* Верхняя граница ячейки */
+    border-right: 1px solid var(--table-cell-border); /* Правая граница ячейки */
+}
+
+/* Убираем верхнюю границу у первой строки */
+tbody tr:first-child td {
+    border-top: none;
+}
+
+/* Убираем правую границу у последней ячейки в строке */
+tbody td:last-child {
+    border-right: none;
+}
+
+/* --- Контейнер для кнопок действий --- */
+.actions-container {
+    display: flex;
+    justify-content: center;
+    gap: 25px; /* Расстояние между кнопками */
+    margin-top: 20px;
+}
+
+/* --- Стиль кнопок "Назад" --- */
+.btn-action {
+    display: inline-flex; /* Чтобы иконка и текст были в одной строке */
+    align-items: center;
+    padding: 12px 25px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue)); /* Синий градиент */
+    border: none;
+    border-radius: 12px;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 0 6px 15px var(--button-primary-shadow);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden; /* Для эффекта сияния */
+}
+
+.btn-action i {
+    margin-right: 10px;
+    color: var(--icon-color);
+    font-size: 1.1em;
+    transition: color 0.3s ease;
+}
+
+.btn-action:hover {
+    background: linear-gradient(135deg, var(--secondary-blue), var(--primary-blue)); /* Инвертированный градиент */
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px var(--button-primary-shadow);
+    color: var(--text-primary); /* Убеждаемся, что текст белый */
+}
+
+.btn-action:hover i {
+    color: var(--icon-color-hover);
+}
+
+.btn-action:active {
+    transform: translateY(0px);
+    box-shadow: 0 4px 10px var(--button-primary-shadow);
+}
+
+/* Эффект сияния (как на кнопках меню) */
+.btn-action::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: skewX(-30deg);
+    transition: 0.4s;
+    z-index: 1;
+}
+
+.btn-action:hover::before {
+    left: 100%;
+}
+
+
+/* --- Медиа-запросы --- */
+@media (max-width: 992px) {
+    .container {
+        width: 95%;
+        padding: 30px 25px;
+    }
+    .report-title {
+        font-size: 2.2rem;
+    }
+    thead th {
+        font-size: 1rem;
+        padding: 15px 10px;
+    }
+    tbody td {
+        font-size: 0.95rem;
+        padding: 12px 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 100%;
+        border-radius: 0; /* Убираем скругление на малых экранах */
+        box-shadow: none;
+        padding: 20px 15px;
+        min-height: 100vh; /* Занимаем всю высоту */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .report-title {
+        font-size: 1.8rem;
+        margin-bottom: 25px;
+    }
+    .table-wrapper {
+        max-height: 60vh; /* Немного больше высоты для мобильных */
+    }
+    thead th, tbody td {
+        padding: 10px 8px;
+        font-size: 0.9rem;
+    }
+    thead th {
+        font-weight: 500;
+    }
+    .actions-container {
+        flex-direction: column; /* Кнопки друг под другом */
+        gap: 15px;
+        margin-top: 25px;
+    }
+    .btn-action {
+        width: 100%; /* Занимают всю ширину */
+        justify-content: center;
+    }
+    .btn-action i {
+        margin-right: 8px;
+        font-size: 1em;
+    }
+}

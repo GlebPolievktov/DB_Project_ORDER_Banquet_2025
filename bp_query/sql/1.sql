@@ -1,0 +1,1 @@
+SELECT surname,passport_data,date_employment,birth FROM rk6_sheme.Managers WHERE surname = (%s)

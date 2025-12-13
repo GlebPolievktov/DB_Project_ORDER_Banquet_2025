@@ -1,0 +1,1 @@
+SELECT COALESCE(MAX(order_id), 0) + 1 FROM `Order`;

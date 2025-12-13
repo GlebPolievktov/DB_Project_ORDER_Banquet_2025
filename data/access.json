@@ -1,0 +1,18 @@
+{
+  "manager": [
+    "bp_auth",
+    "bp_query",
+    "bp_report",
+    "bp_banquet"
+  ],
+  "director" : [
+    "bp_auth",
+    "bp_query",
+    "bp_report"
+  ],
+  "accountant" : [
+    "bp_auth",
+    "bp_query",
+    "bp_report"
+  ]
+}

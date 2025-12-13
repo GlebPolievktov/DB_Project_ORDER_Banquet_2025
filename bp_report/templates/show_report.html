@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Просмотр отчётов</title>
+    <style>
+        /* New Style: Clean Corporate / Primary Colors */
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap');
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #E6F0F9 0%, #F5F8FA 100%);
+            color: #333333;
+        }
+        .container {
+            background: #FFFFFF;
+            padding: 40px 50px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+            transition: box-shadow 0.3s ease;
+            border-top: 5px solid #C49B00; /* Gold accent */
+        }
+        .container:hover {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+        h2 {
+            color: #C49B00; /* Gold */
+            text-align: center;
+            margin-bottom: 30px;
+            letter-spacing: 1.5px;
+            font-weight: 900;
+            text-transform: uppercase;
+            border-bottom: 2px solid #D32F2F; /* Red underline for viewing */
+            padding-bottom: 10px;
+            font-size: 2rem;
+        }
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #1976D2; /* Blue label */
+            font-weight: 700;
+            font-size: 1.05rem;
+        }
+        input[type="text"] {
+            background: #F8F8F8;
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #CCCCCC;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 1rem;
+            color: #333333;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+        input[type="text"]:focus {
+            background: #FFFFFF;
+            border-color: #1976D2; /* Blue focus */
+            box-shadow: 0 0 8px rgba(25, 118, 210, 0.3);
+        }
+
+        input[type="submit"] {
+            background: #1976D2; /* Blue Submit Button (View) */
+            color: white;
+            padding: 14px 0;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 25px;
+            box-shadow: 0 4px 10px rgba(25, 118, 210, 0.4);
+            text-transform: uppercase;
+        }
+        input[type="submit"]:hover {
+            background: #1565C0;
+            box-shadow: 0 6px 15px rgba(25, 118, 210, 0.6);
+            transform: translateY(-1px);
+        }
+        .btn-back {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #C49B00; /* Gold Back Button */
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 700;
+            font-size: 1rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .btn-back:hover {
+            background: #A08000;
+            transform: scale(1.02);
+        }
+        .message {
+            padding: 12px;
+            margin-bottom: 20px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 1.05rem;
+            text-align: center;
+            background-color: #FFEBEE; /* Light Red */
+            color: #D32F2F; /* Red */
+            border: 1px solid #D32F2F;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>{{report_type_text}}</h2>
+
+        {% if message %}
+            <div class="message">
+                {{ message }}
+            </div>
+        {% endif %}
+
+        <form action="" method="POST">
+            <input type="hidden" name="query_type" value="{{ query_type }}">
+
+            <div class="form-group">
+                <label for="month">Месяц отчёта</label>
+                <input type="text" name="month" id="month" placeholder="Например: 1, 2, 3..." required>
+            </div>
+
+            <div class="form-group">
+                <label for="year">Год отчёта</label>
+                <input type="text" name="year" id="year" placeholder="Например: 2024" required>
+            </div>
+
+            <input type="submit" value="Показать отчёт">
+        </form>
+        <a href="/reports" class="btn-back">Назад к отчётам</a>
+        <a href="/menu" class="btn-back" style="margin-left: 10px;">На главную</a>
+    </div>
+</body>
+</html>

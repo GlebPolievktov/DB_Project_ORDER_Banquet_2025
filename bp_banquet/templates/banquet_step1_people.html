@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Заказ банкета - Шаг 1</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1976D2 0%, #42A5F5 50%, #FFECB3 100%); /* Голубой с золотистым акцентом */
+            margin: 0;
+            padding: 40px 20px;
+            color: #1A237E;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            max-width: 500px;
+            width: 100%;
+            background: #ffffffdd;
+            border-radius: 20px;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+        }
+        h1 {
+            text-align: center;
+            color: #D32F2F; /* Красный */
+            margin-bottom: 10px;
+            font-size: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .step-indicator {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 0.9rem;
+        }
+        .error {
+            background: #FFEBEE;
+            color: #C62828;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid #C62828;
+        }
+        .form-group {
+            margin-bottom: 25px;
+        }
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #1976D2; /* Голубой */
+            font-size: 1.1rem;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #1976D288;
+            border-radius: 10px;
+            font-size: 1rem;
+            color: #1A237E;
+            box-sizing: border-box;
+        }
+        input[type="number"]:focus {
+            outline: none;
+            border-color: #FFC107; /* Золотой/Желтый фокус */
+            box-shadow: 0 0 8px rgba(255, 193, 7, 0.6);
+        }
+        .btn-submit {
+            width: 100%;
+            padding: 16px 0;
+            background: linear-gradient(90deg, #D32F2F, #FF5252); /* Красный градиент */
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 6px 18px rgba(211, 47, 47, 0.5);
+            transition: all 0.3s ease;
+            margin-top: 30px;
+        }
+        .btn-submit:hover {
+            background: linear-gradient(90deg, #B71C1C, #D32F2F);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 28px rgba(183, 28, 28, 0.7);
+        }
+        .btn-back {
+            display: inline-block;
+            background: #1976D2; /* Голубой */
+            color: #fff;
+            text-decoration: none;
+            padding: 12px 30px;
+            margin-top: 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(25, 118, 210, 0.4);
+            transition: all 0.3s ease;
+        }
+        .btn-back:hover {
+            background: #0D47A1;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Заказ банкета</h1>
+        <div class="step-indicator">Шаг 1 из 3: Выбор количества людей</div>
+
+        {% if error %}
+        <div class="error">{{ error }}</div>
+        {% endif %}
+
+        <form action="/banquet/step1" method="POST">
+            <div class="form-group">
+                <label for="number_of_people">Количество людей на банкете:</label>
+                <input type="number" name="number_of_people" id="number_of_people"
+                       min="1" required placeholder="Введите количество людей">
+            </div>
+
+            <button type="submit" class="btn-submit">Продолжить</button>
+        </form>
+
+        <a href="/menu" class="btn-back">На главную</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<style>
+    /*
+     * Цветовая схема: Clean Corporate / Primary Colors
+     * Фон: #E6F0F9 (Светлый Голубой)
+     * Золотой акцент: #C49B00
+     * Синий акцент: #1976D2
+     * Красный акцент: #D32F2F
+     * Текст: #333333
+     */
+    body {
+        font-family: 'Roboto', sans-serif;
+        background: linear-gradient(135deg, #E6F0F9 0%, #F5F8FA 100%);
+        margin: 0;
+        padding: 60px 20px;
+        color: #333333;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+    }
+    .container {
+        background: #ffffff;
+        padding: 50px 45px 60px;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1); /* Простая тень */
+        max-width: 450px;
+        width: 100%;
+        text-align: center;
+        transition: box-shadow 0.3s ease;
+        border: 2px solid #C49B00; /* Золотистая рамка */
+    }
+    .container:hover {
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+    h2 {
+        color: #C49B00; /* Золотой заголовок */
+        margin-bottom: 40px;
+        font-weight: 900;
+        font-size: 2.2rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        text-shadow: none; /* Убрана сильная подсветка */
+    }
+    .query-types {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 40px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+    .btn {
+        display: block;
+        padding: 18px 0;
+        background: #1976D2; /* Синий фон */
+        color: #ffffff;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 1.2rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(25, 118, 210, 0.4);
+        transition: all 0.2s ease;
+        letter-spacing: 1px;
+        border: 1px solid #1976D2;
+    }
+    .btn:hover {
+        background: #1565C0; /* Темнее синий */
+        color: #FFFFFF;
+        transform: translateY(-1px);
+        box-shadow: 0 6px 15px rgba(25, 118, 210, 0.6);
+    }
+    .btn:active {
+        transform: translateY(0);
+        box-shadow: 0 3px 8px rgba(25, 118, 210, 0.4);
+    }
+    .btn-back {
+        display: inline-block;
+        padding: 14px 25px;
+        background: #C49B00; /* Золотой фон */
+        color: #FFFFFF;
+        border-radius: 8px;
+        font-weight: 700;
+        font-size: 1rem;
+        transition: background 0.3s ease, transform 0.3s ease;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        text-decoration: none;
+        margin-top: 15px;
+    }
+    .btn-back:hover {
+        background: #A08000;
+        color: #FFFFFF;
+        transform: scale(1.02);
+    }
+    @media (max-width: 500px) {
+        .container {
+            padding: 35px 30px 45px;
+        }
+    }
+</style>
+
+<body>
+    <div class="container">
+        <h2>Меню запросов</h2>
+        <ul class="query-types">
+            <li><a href="/query/category" class="btn">Информация о менеджере</a></li>
+            <li><a href="/query/price" class="btn"> Информация о заказах</a></li>
+        </ul>
+        <a href="/menu" class="btn-back">На главную</a>
+    </div>
+</body>

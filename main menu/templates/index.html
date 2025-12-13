@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ресторан - Главная страница</title>
+    <style>
+        /*
+         * НОВЫЙ ДИЗАЙН: Роскошь и Профессионализм (Синий + Золотой + Красный)
+         * Фон: Темный градиент #ECEFF1 (Light Blue Grey) -> #CFD8DC (Blue Grey)
+         * Основной цвет: #1976D2 (Deep Blue)
+         * Акцент 1: #FFC107 (Amber/Gold)
+         * Акцент 2 (Новый): #C62828 (Deep Red/Bordeaux)
+         * Текст: #263238 (Dark Blue Grey)
+         */
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #ECEFF1 0%, #CFD8DC 100%); /* Светло-серый/синий градиент */
+            font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            color: #263238;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px 20px;
+        }
+        .container {
+            background: #FFFFFF;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(25, 118, 210, 0.15); /* Тень от #1976D2 */
+            width: 100%;
+            max-width: 900px;
+            text-align: center;
+            border: 1px solid #90CAF9; /* Светло-синяя рамка */
+            transition: transform 0.4s ease-in-out;
+        }
+        .container:hover {
+            transform: scale(1.01);
+            box-shadow: 0 20px 50px rgba(25, 118, 210, 0.25); /* Тень от #1976D2 */
+        }
+        h1 {
+            margin-bottom: 15px;
+            font-size: 3rem;
+            font-weight: 900;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: #1976D2; /* Глубокий Синий */
+        }
+        .subtitle {
+            margin-bottom: 40px;
+            font-size: 1.2rem;
+            color: #78909C;
+            font-weight: 400;
+        }
+        .menu-section {
+            margin: 50px 0;
+            text-align: left;
+        }
+        .menu-section h2 {
+            color: #FFC107; /* Золотой подзаголовок */
+            margin-bottom: 30px;
+            font-size: 2rem;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 700;
+            text-shadow: 1px 1px 3px rgba(255, 193, 7, 0.2);
+        }
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        .menu-item {
+            background: #E3F2FD; /* Очень светло-синий фон */
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border-left: 5px solid #42A5F5; /* Средне-синяя полоса */
+        }
+        .menu-item:hover {
+            background: #FFF8E1; /* Светло-желтый на ховере */
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(255, 193, 7, 0.2); /* Золотая тень */
+            border-left: 5px solid #FFC107; /* Золотая полоса */
+        }
+        .menu-item-name {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: #455A64; /* Темно-серый для имени (новый) */
+            margin-bottom: 10px;
+        }
+        .menu-item-price {
+            color: #C62828; /* Темно-Красный для цены (новый) */
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+        .btn-auth {
+            display: inline-block;
+            padding: 18px 60px;
+            background: linear-gradient(45deg, #FFC107, #FFEB3B); /* Золотой градиент */
+            color: #263238; /* Темный текст на золотом */
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.25rem;
+            border-radius: 50px;
+            box-shadow: 0 8px 25px rgba(255, 193, 7, 0.5);
+            transition: all 0.4s ease;
+            margin-top: 30px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 3px solid #FFF59D; /* Светлая золотая рамка */
+        }
+        .btn-auth:hover {
+            background: linear-gradient(45deg, #FFEB3B, #FFC107);
+            box-shadow: 0 12px 30px rgba(255, 193, 7, 0.8);
+            transform: scale(1.05) rotate(-1deg);
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 30px;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Добро пожаловать в ресторан</h1>
+
+        <div class="menu-section">
+            <h2>Наше меню</h2>
+            {% if menu_items %}
+                <div class="menu-grid">
+                    {% for item in menu_items %}
+                    <div class="menu-item">
+                        <div class="menu-item-name">{{ item[1] }}</div>
+                        <div class="menu-item-price">{{ item[2] }} руб.</div>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="no-menu">
+                    <p>Меню временно недоступно</p>
+                </div>
+            {% endif %}
+        </div>
+
+        <a href="/auth" class="btn-auth">Войти в систему</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,1 @@
+SELECT login, password, r_name FROM rk6_sheme.internal_user JOIN rk6_sheme.role USING(r_id) WHERE login=(%s);

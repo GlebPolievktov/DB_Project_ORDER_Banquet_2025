@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Ошибка авторизации</title>
+    <style>
+        /*
+         * Дизайн: Bright Corporate / Gold Accent
+         * Фон: Светлый голубой градиент #E6F0F9 -> #F5F8FA
+         * Золотой акцент: #C49B00 (Muted Gold)
+         * Красный акцент: #D32F2F (Solid Red)
+         * Голубой/Акцент: #1976D2 (Deep Blue)
+         * Текст: #333333
+         */
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap');
+
+        body {
+            background: linear-gradient(135deg, #E6F0F9 0%, #F5F8FA 100%);
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333333; /* Темный текст для контраста */
+        }
+
+        .container {
+            background: #FFFFFF; /* Белый фон */
+            padding: 40px 50px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-top: 5px solid #C49B00; /* Золотая верхняя полоса */
+            width: 350px;
+            text-align: center;
+            transition: box-shadow 0.3s ease;
+        }
+        .container:hover {
+             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .title {
+            margin-bottom: 30px;
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: #C49B00; /* Золотой заголовок */
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            border-bottom: 2px solid #1976D2; /* Голубая линия под заголовком */
+            padding-bottom: 10px;
+        }
+
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            text-align: left;
+        }
+
+        /* Стиль для полей ввода */
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 14px 18px;
+            background: #F8F8F8; /* Очень светлый фон поля */
+            border: 1px solid #CCCCCC;
+            border-radius: 6px;
+            font-size: 1rem;
+            color: #333333;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        input[type="text"]:focus, input[type="password"]:focus {
+            background: #FFFFFF;
+            border-color: #D32F2F; /* Красный контур при фокусе */
+            box-shadow: 0 0 5px rgba(211, 47, 47, 0.3); /* Легкая тень */
+        }
+
+        input::placeholder {
+            color: #90A4AE;
+            opacity: 1;
+        }
+
+        /* Стиль для сообщения об ошибке (заменили h3) */
+        .error-message {
+            color: #D32F2F; /* Красный цвет для ошибки */
+            margin: 15px 0 10px;
+            font-weight: 700;
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        /* Стиль для кнопки Войти (Красный) */
+        .btn-primary {
+            margin-top: 25px;
+            padding: 15px 0;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #FFFFFF;
+            background: #D32F2F; /* Сплошной красный цвет */
+            border: 2px solid #C49B00; /* Золотая рамка кнопки */
+            border-radius: 6px;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-primary:hover {
+            background: #B71C1C; /* Чуть темнее красный при наведении */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transform: scale(1.01);
+        }
+
+        /* Стиль для кнопки Назад (не используется в предоставленном коде, но оставлен на случай добавления) */
+        .btn-back {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 0;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #1976D2;
+            text-decoration: none;
+            border: 2px solid #1976D2;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            background: none;
+            width: 100%;
+        }
+
+        .btn-back:hover {
+            background: #1976D2;
+            color: #FFFFFF;
+            border-color: #FFFFFF;
+            transform: scale(1.01);
+        }
+
+        @media (max-width: 400px) {
+            .container {
+                width: 90%;
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="title">Авторизация</h2>
+        <form class="auth-form" action="" autocomplete="on" method="post">
+            <div class="form-group">
+                <input type="text" name="login" placeholder="Введите имя пользователя" required>
+            </div>
+            <div class="form-group">
+                <input type="password" name="password" placeholder="Введите пароль" required>
+            </div>
+            <p class="error-message">Неверный логин или пароль</p>
+            <button type="submit" class="btn-primary">Войти</button>
+        </form>
+        </div>
+</body>
+</html>

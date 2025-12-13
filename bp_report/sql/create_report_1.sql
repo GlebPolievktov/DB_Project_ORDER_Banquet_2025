@@ -1,0 +1,1 @@
+call rk6_sheme.procedure_main_2(%s, %s);

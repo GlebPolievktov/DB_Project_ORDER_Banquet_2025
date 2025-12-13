@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Заказ банкета - Шаг 4</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1976D2 0%, #42A5F5 50%, #FFECB3 100%); /* Голубой с золотистым акцентом */
+            margin: 0;
+            padding: 40px 20px;
+            color: #1A237E;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #ffffffdd;
+            border-radius: 20px;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+        }
+        h1 {
+            text-align: center;
+            color: #D32F2F; /* Красный */
+            margin-bottom: 10px;
+            font-size: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .step-indicator {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 0.9rem;
+        }
+        .error {
+            background: #FFEBEE;
+            color: #C62828;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 600;
+        }
+        .menu-layout {
+            display: flex;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        .menu-section, .cart-section {
+            flex: 1;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            background: #fdfdfd;
+        }
+        .menu-section h2, .cart-section h2 {
+            color: #1976D2; /* Голубой */
+            border-bottom: 2px solid #1976D2;
+            padding-bottom: 10px;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+        /* --- Стили Меню --- */
+        .menu-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px dashed #eee;
+            gap: 15px;
+        }
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+        .menu-checkbox {
+            transform: scale(1.2);
+            margin-right: 10px;
+            accent-color: #D32F2F; /* Красный акцент */
+        }
+        .menu-item-info {
+            flex-grow: 1;
+        }
+        .menu-item-name {
+            font-weight: 600;
+            color: #1A237E;
+            margin-bottom: 4px;
+        }
+        .menu-item-price {
+            font-size: 0.9em;
+            color: #666;
+        }
+        .menu-item-quantity {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .menu-item-quantity input[type="number"] {
+            width: 60px;
+            padding: 5px;
+            text-align: center;
+            border: 1px solid #1976D288;
+            border-radius: 5px;
+        }
+        .menu-add-form {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 2px solid #1976D2;
+            text-align: center;
+        }
+        .menu-add-form button {
+            background: linear-gradient(90deg, #FFC107, #FFD740); /* Золотой градиент */
+            color: #1A237E;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 18px rgba(255, 193, 7, 0.5);
+        }
+        .menu-add-form button:hover {
+            background: linear-gradient(90deg, #FFA000, #FFC107);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 28px rgba(255, 160, 0, 0.7);
+        }
+
+        /* --- Стили аванса --- */
+        .avance-section {
+            margin-top: 30px;
+            padding: 15px;
+            background: #FFFDE7; /* Светло-золотистый/Кремовый */
+            border-radius: 10px;
+            border: 1px solid #FFC107;
+        }
+        .avance-section label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #1976D2; /* Голубой */
+        }
+        .avance-section input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #FFC107;
+            border-radius: 8px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+        .avance-section button {
+            width: 100%;
+            background: #1976D2; /* Голубой */
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .avance-section button:hover {
+            background: #0D47A1;
+        }
+
+        /* --- Стили Корзины --- */
+        .cart-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        .cart-table th, .cart-table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        .cart-table th {
+            background-color: #FFECB3; /* Светло-золотистый фон */
+            color: #1A237E;
+            font-weight: 700;
+            border-top: 2px solid #FFC107;
+        }
+        .cart-total {
+            text-align: right;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #D32F2F; /* Красный */
+            padding-top: 15px;
+            border-top: 2px solid #D32F2F;
+        }
+
+        /* --- Кнопки действий --- */
+        .cart-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .btn-checkout {
+            background: linear-gradient(90deg, #D32F2F, #FF5252); /* Красный градиент */
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 18px rgba(211, 47, 47, 0.5);
+        }
+        .btn-checkout:hover {
+            background: linear-gradient(90deg, #B71C1C, #D32F2F);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 28px rgba(183, 28, 28, 0.7);
+        }
+        .btn-clear {
+            background: #9E9E9E;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .btn-clear:hover {
+            background: #757575;
+            box-shadow: 0 5px 15px rgba(158, 158, 158, 0.5);
+        }
+        .btn-back {
+            display: inline-block;
+            background: #1976D2; /* Голубой */
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+            margin-top: 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(25, 118, 210, 0.4);
+        }
+        .btn-back:hover {
+            background: #0D47A1;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Выбор Меню</h1>
+        <div class="step-indicator">Шаг 4 из 4: Меню и Корзина</div>
+
+        {% if error %}
+        <div class="error">{{ error }}</div>
+        {% endif %}
+
+        <div class="menu-layout">
+
+            <div class="menu-section">
+                <h2>Меню Ресторана</h2>
+                <form action="/banquet/step4" method="POST" id="menu-form">
+                    <input type="hidden" name="action" value="add_to_cart">
+                    <div class="menu-list">
+                        {% if menu_items %}
+                            {% for item in menu_items %}
+                            <div class="menu-item">
+                                <input type="checkbox" name="selected_{{ item[0] }}" class="menu-checkbox" value="1">
+                                <div class="menu-item-info">
+                                    <div class="menu-item-name">{{ item[1] }}</div>
+                                    <div class="menu-item-price">Цена: {{ "{:,.2f}".format(item[2]) }} руб.</div>
+                                </div>
+                                <div class="menu-item-quantity">
+                                    <label>Кол-во:</label>
+                                    <input type="number" name="quantity_{{ item[0] }}" min="0" value="0" required style="width: 60px;">
+                                </div>
+                            </div>
+                            {% endfor %}
+                        {% else %}
+                            <p>Меню временно недоступно.</p>
+                        {% endif %}
+                    </div>
+                    <div class="menu-add-form">
+                        <button type="submit">Добавить в корзину</button>
+                    </div>
+                </form>
+
+                <div class="avance-section">
+                    <form action="/banquet/step4" method="POST" style="margin-top: 20px;">
+                        <input type="hidden" name="action" value="update_avance">
+                        <label for="avance">Сумма аванса (руб.):</label>
+                        <input type="number" name="avance" id="avance" min="0" step="0.01" value="{{ avance|default(0) }}">
+                        <button type="submit">Обновить аванс</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="cart-section">
+                <h2>Ваша Корзина</h2>
+
+                {% if cart_items %}
+                    <table class="cart-table">
+                        <thead>
+                            <tr>
+                                <th>Блюдо</th>
+                                <th>Цена (ед.)</th>
+                                <th>Кол-во</th>
+                                <th>Сумма</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for cart_item in cart_items %}
+                            <tr>
+                                <td>{{ cart_item.name }}</td>
+                                <td>{{ "{:,.2f}".format(cart_item.price) }} руб.</td>
+                                <td>{{ cart_item.quantity }}</td>
+                                <td>{{ "{:,.2f}".format(cart_item.subtotal) }} руб.</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+                    <div class="cart-total">
+                        Общая стоимость: {{ "{:,.2f}".format(total_cost) }} руб.
+                    </div>
+
+                    <div class="cart-actions">
+                        <form action="/banquet/step4" method="POST" style="display: inline;">
+                            <input type="hidden" name="action" value="clear_cart">
+                            <button type="submit" class="btn-clear">Очистить корзину</button>
+                        </form>
+
+                        <form action="/banquet/step4" method="POST" style="display: inline;">
+                            <input type="hidden" name="action" value="checkout">
+                            <button type="submit" class="btn-checkout">Оформить заказ</button>
+                        </form>
+                    </div>
+
+                {% else %}
+                    <p>Ваша корзина пуста. Выберите блюда из меню слева.</p>
+                    <div class="cart-actions">
+                        <form action="/banquet/step4" method="POST" style="display: inline;">
+                            <input type="hidden" name="action" value="checkout">
+                            <button type="submit" class="btn-checkout" disabled>Оформить заказ</button>
+                        </form>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <a href="/banquet/step3" class="btn-back">Назад к деталям банкета</a>
+    </div>
+</body>
+</html>

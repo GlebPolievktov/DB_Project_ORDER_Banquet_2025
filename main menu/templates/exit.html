@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Выход из системы</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap');
+
+  /*
+   * НОВЫЙ ДИЗАЙН: Роскошь и Профессионализм (Синий + Золотой + Красный)
+   * Фон: Темный градиент #ECEFF1 -> #FFF8E1
+   * Акцент: #C62828 (Deep Red/Bordeaux)
+   */
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #ECEFF1 0%, #FFF8E1 100%);
+    font-family: 'Montserrat', sans-serif;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .container {
+    background: #FFFFFF;
+    padding: 60px 40px;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(25, 118, 210, 0.2); /* Синяя тень */
+    text-align: center;
+    color: #212121;
+    width: 100%;
+    max-width: 500px;
+    border: 1px solid #BBDEFB; /* Светло-синяя рамка */
+    transition: transform 0.3s ease;
+  }
+  .container:hover {
+      transform: translateY(-8px);
+  }
+
+  h1 {
+    font-size: 3.5rem;
+    margin-bottom: 10px;
+    color: #1976D2; /* Глубокий Синий заголовок */
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .subtitle {
+    margin-bottom: 50px;
+    font-size: 1.3rem;
+    color: #616161;
+    font-weight: 500;
+  }
+
+  .btn-auth {
+    display: inline-block;
+    text-decoration: none;
+    /* Красный градиент для кнопки "Войти снова" */
+    background: linear-gradient(45deg, #C62828, #E53935);
+    color: white;
+    font-weight: 700;
+    font-size: 1.3rem;
+    padding: 18px 60px;
+    border-radius: 50px;
+    box-shadow: 0 8px 25px rgba(198, 40, 40, 0.6); /* Красная тень */
+    transition: all 0.4s ease;
+    margin-top: 30px;
+    text-transform: uppercase;
+    animation: pulseRed 2s infinite ease-in-out; /* Эффект пульсации */
+  }
+
+  .btn-auth:hover {
+    background: linear-gradient(45deg, #E53935, #C62828);
+    box-shadow: 0 12px 30px rgba(198, 40, 40, 0.8);
+    transform: scale(1.1);
+  }
+
+  @keyframes pulseRed {
+      0% { box-shadow: 0 8px 25px rgba(198, 40, 40, 0.6); }
+      50% { box-shadow: 0 10px 30px rgba(198, 40, 40, 0.9); }
+      100% { box-shadow: 0 8px 25px rgba(198, 40, 40, 0.6); }
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <h1>До свидания!</h1>
+    <p class="subtitle">Вы успешно вышли из системы.</p>
+    <a href="/" class="btn-auth">Войти снова</a>
+  </div>
+</body>
+</html>
